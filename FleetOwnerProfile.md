@@ -112,10 +112,9 @@ flowchart TD
   R7 -->|"Success"|Q["Back to Profile Screen"]
   R7 -->|"Failure"| R8[Retry Bank Details]
 
-```
-
   
 %% Profile Completion Check
   Q -->|All Sections Completed| S[Profile Completion 100%]
   Q -->|Any Section Pending| T[Profile Still Incomplete - Show Pending Items]
   S -->|Enable Submit button | U["Buy Plan & Start "]
+```
