@@ -5,7 +5,7 @@ flowchart TD
     C -- Click Personal Details --> PD["Personal Details"]
     C -- Click Vehicle Details --> E["Vehicle Details Screen"]
     C -- Click Bank Details --> F["Bank Details Screen"]
-    %KYC flow
+
     PD -- Click KYC --> KYC["Know Your Customer"]
     PD -- Click DL Details --> DL["Driving License Details"]
     KYC -- Select Aadhaar or PAN --> K1{"KYC Selection"}
@@ -22,7 +22,7 @@ flowchart TD
     K9 -- Click Submit --> K10["Aadhaar Under Verification"]
     K10 -- Failure --> K11["Retry Aadhaar Upload"]
     K10 -- Success --> G["Back to Profile Screen"]
-    % PAN detail Flow
+  
     K3 -- Enter PAN Number --> K12["PAN Entered"]
     K12 -- Click Submit --> K13["PAN Under Verification"]
     K13 -- Success --> G
@@ -32,14 +32,13 @@ flowchart TD
     KC -- User Confirms --> K3
     KC -- User Cancels --> K1
 
-    % DL flow
+
     DL -- Upload DL Front --> D13["DL Front Uploaded"]
     D13 -- Upload DL Back --> D14["DL Back Uploaded"]
     D14 -- Click Submit --> D15["DL Under Verification"]
     D15 -- Success --> G
     D15 -- Failure --> D16["Retry DL Upload"]
 
-    % Vehicle details
     E -- Enter Vehicle Number --> E1["Vehicle Number Entered <br> Validation: <br> 1. Must start with Indian State code . <br> 2. Cannot be all zeros. <br> 3. Only uppercase letters and digits. <br> 4. Must be in standard format."]
     E -- Upload RC Card --> E2["RC Card Uploaded"]
     E1 --> E3{"Are both vehicle number & RC uploaded?"}
