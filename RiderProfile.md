@@ -50,23 +50,22 @@ graph TD;
   D16 -->|"User Clicks Retry"| DL
 
   %% Vehicle Details Flow
-  E -->|Enter Vehicle Number| E1[Vehicle Number Entered<br>Validation:<br>1. Starts with state code<br>2. No all zeros<br>3. Uppercase only<br>4. Valid format]
-  E -->|Upload RC Card| E2[RC Card Uploaded]
-
-  E1 --> E3{Both Vehicle Number & RC Uploaded?}
+  E -- Enter Vehicle Number --> E1["Vehicle Number Entered <br> Validation:<br>1. Starts with state code<br>2. Not all zeros<br>3. Uppercase & digits<br>4. Standard format"]
+  E -- Upload RC Card --> E2["RC Card Uploaded"]
+  E1 --> E3{"Are both Vehicle Number & RC uploaded?"}
   E2 --> E3
+  E3 -- No --> E4["Show Required Fields Message"]
+  E3 -- Yes --> E5["Enable Submit Button"]
+  E5 -- Click Submit --> E6["RC Card Under Verification"]
+  E6 -- Failure --> E
+  E6 -- Once Verified --> E7["Select Fuel Type"]
 
-  E3 --|No|--> E4[Show Required Fields Message]
-  E3 --|Yes|--> E5[Enable Submit Button]
-  E5 -->|Click Submit| E6[RC Card Under Verification]
-  E6 -->|"Success"| E7[Select Vehicle Type]
-  E6 -->|"Failure"| E8[Retry RC Upload]
 
-  %% Vehicle Type Selection
-  E7 -->|Select Fuel Type| E9[Enable Submit Button]
+  %% Fuel Type Selection
+  E7 --> E9[Enable Submit Button]
   E9 -->|Click Submit| G
 
-  %% Bank Details Flow
+   %% Bank Details Flow
   F -->|Enter Account Holder's Name| F1[Enter Name<br>Validation:<br>1. Only letters<br>2. 2-200 characters<br>3. No special characters<br>4. No leading/trailing spaces]
   F1 -->|Enter Account Number| F2[Account Number<br>6-18 digits only]
   F2 -->|Re-enter Account Number| F3[Re-enter Account Number]
@@ -81,15 +80,25 @@ graph TD;
   %% Completion Checks
   G -->|All Sections Completed| H[Profile Completion 100%]
   G -->|Any Section Pending| I[Profile Incomplete - Show Pending Items]
-  H --> J[Buy Plan & Start]
 
-  %% Retry Uploads
-  E8 -->|"User Clicks Retry"| E
-  F8 -->|"User Clicks Retry"| F
+  
+  %% Continuing from Profile Completion
+  H --> J[Buy Plan Screen]
 
-  %% Pending Sections Navigation
-  H -->|"Click Profile Again"| C
-  I -->|"Click KYC"| KYC
-  I -->|"Click DL"| DL
-  I -->|"Click Vehicle Details"| E
-  I -->|"Click Bank Details"| F
+  %% Buy Plan Flow (Screens in your image)
+  J --> J1[Show Plan Options:
+  Weekly, Daily, Monthly]
+  J1 -->|User Selects Plan| J2["Highlight Selected Plan & Show Price"]
+  J2 -->|Click Proceed| J3["Plan Confirmation Screen -
+  Plan Selected - Daily Plan (Rs.15)"]
+  J3 --> J4[Select Payment Method : 
+  Card / Net Banking / UPI]
+  J4 -->|User Chooses UPI App| J5[Choose App : 
+  GPay, Paytm, PhonePe, etc.]
+  J4 -->|User Enters UPI ID| J6[Enter UPI ID & Click Verify]
+  J5 --> J7[Redirect to App for Payment]
+  J6 --> J7
+  J7 --> J8[Payment Status:
+  Success / Failure]
+  J8 -->|Success| J9["Plan Activated - Go Online"]
+  J8 -->|Failure| J10["Retry Payment"]
