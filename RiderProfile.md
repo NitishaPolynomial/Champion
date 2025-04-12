@@ -81,6 +81,7 @@ graph TD;
   %% Completion Checks
   G -->|All Sections Completed| H[Profile Completion 100%]
   G -->|Any Section Pending| I[Profile Incomplete - Show Pending Items]
+  H --> J[Buy Plan & Start]
 
   %% Retry Uploads
   E8 -->|"User Clicks Retry"| E
