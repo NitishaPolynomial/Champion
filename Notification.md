@@ -15,23 +15,18 @@ flowchart TD
     %% Tapping on Notification
     F2 --> G{User taps a notification}
     G --> G1[If 'Order Delivered' → Open Order Details]
-    G --> G2[If 'POD Approved' → Trigger POD download]
-    G --> G3[If 'Offer Expiring' → Navigate to Offers Screen]
+    G --> G2[If 'Offer Expiring' → Navigate to Offers Screen]
 
     %% Validations
-    F1 --> V1[Validation: Title, message & time must exist]
-    F1 --> V2[Validation: POD ID must be valid]
-    F1 --> V3[Validation: Duplicate entries should not repeat]
+    F1 --> V1[Title, message & time must exist]
+    F1 --> V3[Duplicate entries should not repeat]
 
     %% Edge Cases
-    F1 --> E1[Edge Case: POD download fails → Show retry option]
-    F1 --> E2[Edge Case: Offer expired → Show 'Offer Inactive' message]
-    F1 --> E3[Edge Case: Fast taps on multiple notifications → App handles gracefully]
-    F1 --> E4[Edge Case: Offline Mode → Show cached or no notifications]
-    F1 --> E5[Edge Case: Scroll performance for 100+ notifications]
+    
+    F1 --> E4[Offline Mode → Show cached or no notifications]
+    F1 --> E5[Scroll performance for 100+ notifications]
 
     G1 --> H[Mark Notification as Read]
-    G2 --> H
-    G3 --> H --> B
+    G2 --> H --> B
 
 ```
