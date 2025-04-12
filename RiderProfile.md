@@ -85,20 +85,36 @@ graph TD;
   %% Continuing from Profile Completion
   H --> J[Buy Plan Screen]
 
-  %% Buy Plan Flow (Screens in your image)
-  J --> J1[Show Plan Options:
-  Weekly, Daily, Monthly]
+ %% Buy Plan Flow (Screens in your image)
+  J --> J1[Show Plan Options: Weekly, Daily, Monthly]
   J1 -->|User Selects Plan| J2["Highlight Selected Plan & Show Price"]
-  J2 -->|Click Proceed| J3["Plan Confirmation Screen -
-  Plan Selected - Daily Plan (Rs.15)"]
-  J3 --> J4[Select Payment Method : 
-  Card / Net Banking / UPI]
-  J4 -->|User Chooses UPI App| J5[Choose App : 
-  GPay, Paytm, PhonePe, etc.]
+  J2 -->|Click Proceed| J3["Plan Confirmation Screen - Plan Selected - Daily Plan (Rs.15)"]
+  J3 --> J4[Select Payment Method: Card / Net Banking / UPI]
+
+  %% UPI Flow
+  J4 -->|User Chooses UPI App| J5[Choose App: GPay, Paytm, PhonePe, etc.]
   J4 -->|User Enters UPI ID| J6[Enter UPI ID & Click Verify]
-  J5 --> J7[Redirect to App for Payment]
+  J5 --> J7[Redirect to UPI App for Payment]
   J6 --> J7
-  J7 --> J8[Payment Status:
-  Success / Failure]
+  J7 --> J8[Payment Status: Success / Failure]
   J8 -->|Success| J9["Plan Activated - Go Online"]
   J8 -->|Failure| J10["Retry Payment"]
+
+  %% Card Flow with OTP
+  J4 -->|User Chooses Card| C1[Enter Card Details: Card Number, Expiry, CVV]
+  C1 --> C2[Click Pay]
+  C2 --> C3[Receive OTP on Registered Mobile]
+  C3 --> C4[Enter OTP]
+  C4 --> C5[Verify OTP & Process Payment]
+  C5 -->|Success| J9
+  C5 -->|Failure| C6["Retry Card Payment"]
+
+  %% Net Banking Flow with OTP
+  J4 -->|User Chooses Net Banking| N1[Select Bank from List]
+  N1 --> N2[Redirect to Bank Portal]
+  N2 --> N3[Login with Credentials]
+  N3 --> N4[Receive OTP on Registered Mobile]
+  N4 --> N5[Enter OTP to Confirm Payment]
+  N5 -->|Success| J9
+  N5 -->|Failure| N6["Retry Net Banking Payment"]
+```
