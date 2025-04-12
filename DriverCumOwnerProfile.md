@@ -73,7 +73,28 @@ flowchart TD
   %% Profile Completion Check
   G -->|All Sections Completed| H[Profile Completion 100%]
   G -->|Any Section Pending| I[Profile Still Incomplete - Show Pending Items]
-  H --> J[Buy Plan & Start]
+
+
+  %% Continuing from Profile Completion
+  H --> J[Buy Plan Screen]
+
+  %% Buy Plan Flow (Screens in your image)
+  J --> J1[Show Plan Options:
+  Weekly, Daily, Monthly]
+  J1 -->|User Selects Plan| J2["Highlight Selected Plan & Show Price"]
+  J2 -->|Click Proceed| J3["Plan Confirmation Screen -
+  Plan Selected - Daily Plan (Rs.15)"]
+  J3 --> J4[Select Payment Method : 
+  Card / Net Banking / UPI]
+  J4 -->|User Chooses UPI App| J5[Choose App : 
+  GPay, Paytm, PhonePe, etc.]
+  J4 -->|User Enters UPI ID| J6[Enter UPI ID & Click Verify]
+  J5 --> J7[Redirect to App for Payment]
+  J6 --> J7
+  J7 --> J8[Payment Status:
+  Success / Failure]
+  J8 -->|Success| J9["Plan Activated - Go Online"]
+  J8 -->|Failure| J10["Retry Payment"]
 
 
    
