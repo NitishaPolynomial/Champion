@@ -1,25 +1,18 @@
 ```mermaid
-
 flowchart TD
     A[Start] --> B[Order Created by Loadster, Shiprocket, or Pidge]
     B --> C[Request sent to filtered champions]
     C --> D[Champion accepts and completes the ride]
-
     D --> E{Order Type: COD or Prepaid}
-
     E -- COD --> F[Show cash to be collected]
     F --> G[End]
-
     E -- Prepaid --> H[Show message - Payment in 3 to 5 hours - Add bank details]
     H --> I{Bank Details Exist?}
-
     I -- Yes --> J[Show Done button only]
     J --> K[Click Done to complete trip]
     K --> L[End]
-
     I -- No --> M[Disable Done until bank details are added]
     M --> N{Choose Bank Detail Type}
-
     %% Manual Bank Path
     N -- Bank Details --> B1[Enter Account Holder Name]
     B1 --> B2{Is Name Valid?}
@@ -37,8 +30,7 @@ flowchart TD
     B10 -- No --> B10e[Error - Upload Required]
     B10 -- Yes --> Z
     B4 -- No --> B4e[Error - Invalid Account Number]
-   
-       %% UPI Path
+    %% UPI Path
     N -- UPI ID --> O[Enter or Select UPI ID]
     O --> P{UPI Format Valid?}
     P -- No --> P1[Show error - Invalid format]
@@ -51,5 +43,3 @@ flowchart TD
     Z --> AA[Bank Details Addition Completed]
     AA --> AB[Redirect to Complete Order Screen]
     AB --> AC[End]
-
-```
